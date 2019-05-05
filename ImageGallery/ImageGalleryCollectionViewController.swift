@@ -19,7 +19,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     
     //MARK: - Model
     
-    var images = [UIImage]()
+    var imagesUrls = [URL]()
     
     /*
     // MARK: - Navigation
@@ -38,16 +38,22 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return imagesUrls.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageGalleryCell", for: indexPath)
     
-        if let imageCell = cell as? ImageCell {
-            imageCell.cellImageView.image = images[indexPath.item]
+        if let imageCell = cell as? ImageGalleryCell {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let urlContents = try? Data(contentsOf: self.imagesUrls[indexPath.item])
+                DispatchQueue.main.async {
+                    if let imageData = urlContents {
+                        imageCell.cellImageView.image = UIImage(data: imageData)
+                    }
+                }
+            }
         }
-    
         return cell
     }
     
@@ -70,11 +76,12 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath,
                                                     reuseIdentifier: "DropPlaceholderCell")
             )
-            item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (provider, error) in
-                if let image = provider as? UIImage {
+            item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) { (provider, error) in
+                if let url = (provider as? NSURL) as URL? {
+                    let imageUrl = url.imageUrl
                     DispatchQueue.main.async {
                         placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                            self.images.insert(image, at: insertionIndexPath.item)
+                            self.imagesUrls.insert(imageUrl, at: insertionIndexPath.item)
                         })
                     }
                 } else {
@@ -117,4 +124,19 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     }
     */
 
+}
+
+extension URL {
+    var imageUrl: URL {
+        for query in query?.components(separatedBy: "&") ?? [] {
+            let queryComponents = query.components(separatedBy: "=")
+            if queryComponents.count == 2 {
+                if queryComponents[0] == "imgurl",
+                    let url = URL(string: queryComponents[1].removingPercentEncoding ?? "") {
+                    return url
+                }
+            }
+        }
+        return self.baseURL ?? self
+    }
 }

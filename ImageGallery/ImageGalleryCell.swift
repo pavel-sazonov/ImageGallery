@@ -1,5 +1,5 @@
 //
-//  ImageCell.swift
+//  ImageGalleryCell.swift
 //  ImageGallery
 //
 //  Created by Pavel Sazonov on 30/04/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell {
+class ImageGalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
 }
