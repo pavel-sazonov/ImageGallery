@@ -11,4 +11,6 @@ import UIKit
 class ImageGalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
 }

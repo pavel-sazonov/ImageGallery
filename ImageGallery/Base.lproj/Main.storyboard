@@ -31,6 +31,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="229" height="239"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IAe-gn-IX8">
+                                            <rect key="frame" x="104.5" y="109.5" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tdw-Gt-vkE">
                                             <rect key="frame" x="0.0" y="0.0" width="229" height="239"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,15 +42,18 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="centerX" secondItem="r9p-2b-wR9" secondAttribute="centerX" id="1g9-6g-UB4"/>
+                                    <constraint firstItem="IAe-gn-IX8" firstAttribute="centerY" secondItem="r9p-2b-wR9" secondAttribute="centerY" id="2mS-Wl-GUZ"/>
                                     <constraint firstAttribute="bottom" secondItem="Tdw-Gt-vkE" secondAttribute="bottom" id="5XN-8Z-dTD"/>
                                     <constraint firstAttribute="trailing" secondItem="Tdw-Gt-vkE" secondAttribute="trailing" id="I6S-Iu-VDS"/>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="leading" secondItem="r9p-2b-wR9" secondAttribute="leading" id="JAX-5E-fhN"/>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="top" secondItem="r9p-2b-wR9" secondAttribute="top" id="Nqh-vw-I7X"/>
+                                    <constraint firstItem="IAe-gn-IX8" firstAttribute="centerX" secondItem="r9p-2b-wR9" secondAttribute="centerX" id="SIq-LM-mtt"/>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="centerY" secondItem="r9p-2b-wR9" secondAttribute="centerY" id="XQR-fe-PXE"/>
                                 </constraints>
                                 <size key="customSize" width="229" height="239"/>
                                 <connections>
                                     <outlet property="cellImageView" destination="Tdw-Gt-vkE" id="yUV-Vy-idl"/>
+                                    <outlet property="spinner" destination="IAe-gn-IX8" id="HMH-ct-lWX"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DropPlaceholderCell" id="tlj-7n-2bQ">
@@ -57,9 +63,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="229" height="239"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Tfc-FV-dwG">
-                                            <rect key="frame" x="96" y="101" width="37" height="37"/>
-                                            <color key="color" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Tfc-FV-dwG">
+                                            <rect key="frame" x="104.5" y="109.5" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>

@@ -45,11 +45,13 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageGalleryCell", for: indexPath)
     
         if let imageCell = cell as? ImageGalleryCell {
+            imageCell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
                 let urlContents = try? Data(contentsOf: self.imagesUrls[indexPath.item])
                 DispatchQueue.main.async {
                     if let imageData = urlContents {
                         imageCell.cellImageView.image = UIImage(data: imageData)
+                        imageCell.spinner.stopAnimating()
                     }
                 }
             }
