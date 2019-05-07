@@ -8,10 +8,10 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDropDelegate {
-    
+class ImageGalleryCollectionViewController: UICollectionViewController,
+                                            UICollectionViewDropDelegate,
+                                            UICollectionViewDragDelegate,
+                                            UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dropDelegate = self
@@ -19,7 +19,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     
     //MARK: - Model
     
-    var imagesUrls = [URL]()
+    var URLs = [URL]()
+    var aspectRatios = [CGFloat]()
     
     /*
     // MARK: - Navigation
@@ -38,18 +39,18 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesUrls.count
+        return URLs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageGalleryCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
     
-        if let imageCell = cell as? ImageGalleryCell {
+        if let imageCell = cell as? ImageCollectionViewCell {
             imageCell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
-                let urlContents = try? Data(contentsOf: self.imagesUrls[indexPath.item])
+                let urlContent = try? Data(contentsOf: self.URLs[indexPath.item])
                 DispatchQueue.main.async {
-                    if let imageData = urlContents {
+                    if let imageData = urlContent {
                         imageCell.cellImageView.image = UIImage(data: imageData)
                         imageCell.spinner.stopAnimating()
                     }
@@ -73,27 +74,41 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
         for item in coordinator.items {
+            item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) { (provider, error) in
+                if let url = (provider as? NSURL) as URL? {
+                    let imageUrl = url.imageUrl
+                    self.URLs.insert(imageUrl, at: destinationIndexPath.item)
+                }
+            }
+            
             let placeholderContext = coordinator.drop(
                 item.dragItem,
                 to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath,
                                                     reuseIdentifier: "DropPlaceholderCell")
             )
-            item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) { (provider, error) in
-                if let url = (provider as? NSURL) as URL? {
-                    let imageUrl = url.imageUrl
-                    DispatchQueue.main.async {
+
+            item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (provider, error) in
+                DispatchQueue.main.async {
+                    if let image = provider as? UIImage {
+                        let aspectRatio = image.size.height / image.size.width
                         placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                            self.imagesUrls.insert(imageUrl, at: insertionIndexPath.item)
+                            self.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
                         })
+                    } else {
+                        placeholderContext.deletePlaceholder()
                     }
-                } else {
-                    placeholderContext.deletePlaceholder()
                 }
             }
         }
     }
     
+//     MARK: - Collection View Flow Layout Delegate
     
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 250, height: 250 * aspectRatios[indexPath.item])
+    }
 
     // MARK: UICollectionViewDelegate
 
