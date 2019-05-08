@@ -52,9 +52,11 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
             if indexPath.section == 0 {
                 let deletedGAllery = galleries[0].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                let indexPathForDeletedGallery = IndexPath(row: galleries[1].endIndex, section: 1)
+                
+                // insert deleted row in 'recently deleted' section
+                let insertIndexPath = IndexPath(row: galleries[1].endIndex, section: 1)
                 galleries[1].insert(deletedGAllery, at: galleries[1].endIndex)
-                tableView.insertRows(at: [indexPathForDeletedGallery], with: .fade)
+                tableView.insertRows(at: [insertIndexPath], with: .fade)
             } else if indexPath.section == 1 {
                 galleries[1].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -64,11 +66,31 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
         }
     }
     
+    
     // MARK: - Create New Gallery
     
     @IBAction func newImageGallery(_ sender: UIBarButtonItem) {
         galleries[0] += ["Untitled".madeUnique(withRespectTo: galleries[0])]
         tableView.reloadData()
+    }
+    
+    // MARK: - Leading swipe for restore row from recently deleted section
+    override func tableView(_ tableView: UITableView,
+                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard indexPath.section == 1 else { return nil }
+        
+        let restoreAction = UIContextualAction(style: .normal, title: "Restore") { (action, view, handler) in
+            let deletedGAllery = self.galleries[1].remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // insert deleted row in section 0
+            let insertIndexPath = IndexPath(row: self.galleries[0].endIndex, section: 0)
+            self.galleries[0].insert(deletedGAllery, at: self.galleries[0].endIndex)
+            tableView.insertRows(at: [insertIndexPath], with: .fade)
+            handler(true)
+        }
+                
+        return UISwipeActionsConfiguration(actions: [restoreAction])
     }
 
     /*
