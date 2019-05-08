@@ -23,12 +23,13 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section == 1 else { return nil }
+        
         let label = UILabel()
+        label.text = "Recently Deleted"
         label.backgroundColor = UIColor.lightGray
-        
-        label.text = section == 0 ? "Galleries" : "Recently deleted"
-        
         return label
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,8 +50,12 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            galleries[0].remove(at: indexPath.row)
+            let deletedGAllery = galleries[0].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let indexPathForDeletedGallery = IndexPath(row: galleries[1].endIndex, section: 1)
+            galleries[1].insert(deletedGAllery, at: galleries[1].endIndex)
+            tableView.insertRows(at: [indexPathForDeletedGallery], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
