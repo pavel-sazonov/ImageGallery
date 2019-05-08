@@ -12,10 +12,22 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                                             UICollectionViewDropDelegate,
                                             UICollectionViewDragDelegate,
                                             UICollectionViewDelegateFlowLayout {
+    var flowLayout: UICollectionViewFlowLayout? {
+        return collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    
+    var cellWidth: CGFloat = 250 {
+        didSet {
+            flowLayout?.invalidateLayout()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImages))
+        collectionView.addGestureRecognizer(pinch)
     }
     
     //MARK: - Model
@@ -149,7 +161,18 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 250, height: 250 * aspectRatios[indexPath.item])
+        return CGSize(width: cellWidth, height: cellWidth * aspectRatios[indexPath.item])
+    }
+    
+    // MARK: Gestures
+    
+    @objc func zoomImages(_ sender: UIPinchGestureRecognizer) {
+        switch sender.state {
+        case .changed, .ended:
+            cellWidth *= sender.scale
+            sender.scale = 1.0
+        default: break
+        }
     }
 
     // MARK: UICollectionViewDelegate
