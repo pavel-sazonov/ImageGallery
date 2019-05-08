@@ -54,7 +54,13 @@
                             <outlet property="delegate" destination="Y8e-h9-8SA" id="e39-lR-8By"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="w2c-wI-aNx"/>
+                    <navigationItem key="navigationItem" id="w2c-wI-aNx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="BJ0-t3-KaJ">
+                            <connections>
+                                <action selector="newImageGallery:" destination="Y8e-h9-8SA" id="tHg-Zc-SCc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L1H-9L-Aq5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

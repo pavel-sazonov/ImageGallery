@@ -31,7 +31,14 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
 
         return cell
     }
- 
+    
+    // MARK: - Create New Gallery
+    
+    @IBAction func newImageGallery(_ sender: UIBarButtonItem) {
+        imageGalleryDocuments += ["Untitled".madeUnique(withRespectTo: imageGalleryDocuments)]
+        tableView.reloadData()
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -78,4 +85,16 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension String {
+    func madeUnique(withRespectTo otherStrings: [String]) -> String {
+        var possiblyUnique = self
+        var uniqueNumber = 1
+        while otherStrings.contains(possiblyUnique) {
+            possiblyUnique = self + " \(uniqueNumber)"
+            uniqueNumber += 1
+        }
+        return possiblyUnique
+    }
 }
