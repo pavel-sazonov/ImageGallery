@@ -12,22 +12,35 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     
     // MARK: - Model
     
-    var imageGalleryDocuments = ["one", "two", "three"]
-
+    var galleries = [
+        ["one", "two", "three"],
+        ["lol", "pol", "bol"]
+    ]
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return galleries.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.backgroundColor = UIColor.lightGray
+        
+        label.text = section == 0 ? "Galleries" : "Recently deleted"
+        
+        return label
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imageGalleryDocuments.count
+        return galleries[section].count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        
+        let galleryName = galleries[indexPath.section][indexPath.row]
 
-        cell.textLabel?.text = imageGalleryDocuments[indexPath.row]
+        cell.textLabel?.text = galleryName
 
         return cell
     }
@@ -36,17 +49,17 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            imageGalleryDocuments.remove(at: indexPath.row)
+            galleries[0].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     
     // MARK: - Create New Gallery
     
     @IBAction func newImageGallery(_ sender: UIBarButtonItem) {
-        imageGalleryDocuments += ["Untitled".madeUnique(withRespectTo: imageGalleryDocuments)]
+        galleries[0] += ["Untitled".madeUnique(withRespectTo: galleries[0])]
         tableView.reloadData()
     }
 
