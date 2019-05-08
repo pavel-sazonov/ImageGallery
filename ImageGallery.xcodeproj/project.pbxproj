@@ -13,6 +13,7 @@
 		18185BBB2277744700A52B39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18185BB92277744700A52B39 /* LaunchScreen.storyboard */; };
 		18185BC82278892A00A52B39 /* ImageGalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */; };
 		18789DA72278E88A003A99C8 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */; };
+		18CBC83A2282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		18185BBC2277744700A52B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDocumentTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				18185BB42277744500A52B39 /* Main.storyboard */,
 				18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */,
+				18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */,
 				18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */,
 				18185BBC2277744700A52B39 /* Info.plist */,
 				18185BC22277746300A52B39 /* Supporting Files */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18185BB12277744500A52B39 /* AppDelegate.swift in Sources */,
+				18CBC83A2282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift in Sources */,
 				18185BC82278892A00A52B39 /* ImageGalleryCollectionViewController.swift in Sources */,
 				18789DA72278E88A003A99C8 /* ImageCollectionViewCell.swift in Sources */,
 			);
