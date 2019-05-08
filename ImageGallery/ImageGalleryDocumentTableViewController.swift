@@ -49,13 +49,16 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            let deletedGAllery = galleries[0].remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            let indexPathForDeletedGallery = IndexPath(row: galleries[1].endIndex, section: 1)
-            galleries[1].insert(deletedGAllery, at: galleries[1].endIndex)
-            tableView.insertRows(at: [indexPathForDeletedGallery], with: .fade)
+            if indexPath.section == 0 {
+                let deletedGAllery = galleries[0].remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                let indexPathForDeletedGallery = IndexPath(row: galleries[1].endIndex, section: 1)
+                galleries[1].insert(deletedGAllery, at: galleries[1].endIndex)
+                tableView.insertRows(at: [indexPathForDeletedGallery], with: .fade)
+            } else if indexPath.section == 1 {
+                galleries[1].remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
