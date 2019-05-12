@@ -32,8 +32,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
     //MARK: - Model
     
-    var URLs = [URL]()
-    var aspectRatios = [CGFloat]()
+    var imageGallery = ImageGallery()
     
     /*
     // MARK: - Navigation
@@ -49,7 +48,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
 
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return URLs.count
+        return imageGallery.urls.count
     }
 
     override func collectionView(_ collectionView: UICollectionView,
@@ -59,7 +58,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         if let imageCell = cell as? ImageCollectionViewCell {
             imageCell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
-                let urlContent = try? Data(contentsOf: self.URLs[indexPath.item])
+                let urlContent = try? Data(contentsOf: self.imageGallery.urls[indexPath.item])
                 DispatchQueue.main.async {
                     if let imageData = urlContent {
                         imageCell.cellImageView.image = UIImage(data: imageData)
@@ -117,10 +116,10 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
             // local drag and drop
             if let sourceIndexPath = item.sourceIndexPath {
                 collectionView.performBatchUpdates({
-                    let url = URLs.remove(at: sourceIndexPath.item)
-                    URLs.insert(url, at: destinationIndexPath.item)
-                    let aspectRatio = aspectRatios.remove(at: sourceIndexPath.item)
-                    aspectRatios.insert(aspectRatio, at: destinationIndexPath.item)
+                    let url = imageGallery.urls.remove(at: sourceIndexPath.item)
+                    imageGallery.urls.insert(url, at: destinationIndexPath.item)
+                    let aspectRatio = imageGallery.aspectRatios.remove(at: sourceIndexPath.item)
+                    imageGallery.aspectRatios.insert(aspectRatio, at: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
@@ -130,7 +129,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                 item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) { (provider, error) in
                     if let url = (provider as? NSURL) as URL? {
                         let imageUrl = url.imageUrl
-                        self.URLs.insert(imageUrl, at: destinationIndexPath.item)
+                        self.imageGallery.urls.insert(imageUrl, at: destinationIndexPath.item)
                     }
                 }
                 
@@ -145,7 +144,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                         if let image = provider as? UIImage {
                             let aspectRatio = image.size.height / image.size.width
                             placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                                self.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
+                                self.imageGallery.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
                             })
                         } else {
                             placeholderContext.deletePlaceholder()
@@ -161,7 +160,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellWidth, height: cellWidth * aspectRatios[indexPath.item])
+        return CGSize(width: cellWidth, height: cellWidth * imageGallery.aspectRatios[indexPath.item])
     }
     
     // MARK: Gestures
