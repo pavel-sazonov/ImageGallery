@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-793" y="-564"/>
         </scene>
-        <!--Image Gallery Document Table View Controller-->
+        <!--Galleries-->
         <scene sceneID="orb-Pp-qKu">
             <objects>
                 <tableViewController id="Y8e-h9-8SA" customClass="ImageGalleryDocumentTableViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,7 +54,7 @@
                             <outlet property="delegate" destination="Y8e-h9-8SA" id="e39-lR-8By"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="w2c-wI-aNx">
+                    <navigationItem key="navigationItem" title="Galleries" id="w2c-wI-aNx">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="BJ0-t3-KaJ">
                             <connections>
                                 <action selector="newImageGallery:" destination="Y8e-h9-8SA" id="tHg-Zc-SCc"/>
