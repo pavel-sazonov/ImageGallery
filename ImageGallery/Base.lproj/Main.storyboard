@@ -12,13 +12,13 @@
         <!--Split View Controller-->
         <scene sceneID="PLg-75-Wum">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1hu-GC-0xj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController id="Mak-Jq-khV" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HPV-ft-np3" kind="relationship" relationship="masterViewController" id="2iM-lf-9kP"/>
                         <segue destination="QFg-U2-Eu7" kind="relationship" relationship="detailViewController" id="TjE-ZP-w0C"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hu-GC-0xj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-793" y="-564"/>
         </scene>
@@ -166,7 +166,6 @@
         <!--Navigation Controller-->
         <scene sceneID="4Ea-I8-DmA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iro-js-f28" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QFg-U2-Eu7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zzi-JX-oj9">
@@ -178,6 +177,7 @@
                         <segue destination="zRh-L8-W2V" kind="relationship" relationship="rootViewController" id="rSU-pO-Ono"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iro-js-f28" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-129" y="63"/>
         </scene>

@@ -12,10 +12,8 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     
     // MARK: - Model
     
-    var galleries = [
-        ["one", "two", "three"],
-        ["lol", "pol", "bol"]
-    ]
+    var galleries = [[ImageGallery](), [ImageGallery]()]
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,38 +37,36 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        let galleryName = galleries[indexPath.section][indexPath.row]
+        let galleryName = galleries[indexPath.section][indexPath.row].name
 
         cell.textLabel?.text = galleryName
 
         return cell
     }
 
-    // Override to support editing the table view.
+    // Delete row.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if indexPath.section == 0 {
-                let deletedGAllery = galleries[0].remove(at: indexPath.row)
+                let deletedGallery = galleries[0].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
                 // insert deleted row in 'recently deleted' section
-                let insertIndexPath = IndexPath(row: galleries[1].endIndex, section: 1)
-                galleries[1].insert(deletedGAllery, at: galleries[1].endIndex)
-                tableView.insertRows(at: [insertIndexPath], with: .fade)
+                galleries[1].append(deletedGallery)
+                tableView.insertRows(at: [IndexPath(row: galleries[1].count - 1, section: 1)],
+                                     with: .fade)
             } else if indexPath.section == 1 {
                 galleries[1].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
     
     // MARK: - Create New Gallery
     
     @IBAction func newImageGallery(_ sender: UIBarButtonItem) {
-        galleries[0] += ["Untitled".madeUnique(withRespectTo: galleries[0])]
+        let newGallery = ImageGallery(name: ImageGallery.uniqNewGalleryName(for: galleries))
+        galleries[0].append(newGallery)
         tableView.reloadData()
     }
     
@@ -113,16 +109,4 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
 
-}
-
-extension String {
-    func madeUnique(withRespectTo otherStrings: [String]) -> String {
-        var possiblyUnique = self
-        var uniqueNumber = 1
-        while otherStrings.contains(possiblyUnique) {
-            possiblyUnique = self + " \(uniqueNumber)"
-            uniqueNumber += 1
-        }
-        return possiblyUnique
-    }
 }

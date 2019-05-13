@@ -32,7 +32,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
     //MARK: - Model
     
-    var imageGallery = ImageGallery()
+    var imageGallery = ImageGallery(name: "")
     
     /*
     // MARK: - Navigation
