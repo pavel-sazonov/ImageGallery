@@ -15,7 +15,7 @@
                 <splitViewController id="Mak-Jq-khV" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HPV-ft-np3" kind="relationship" relationship="masterViewController" id="2iM-lf-9kP"/>
-                        <segue destination="QFg-U2-Eu7" kind="relationship" relationship="detailViewController" id="TjE-ZP-w0C"/>
+                        <segue destination="zRh-L8-W2V" kind="relationship" relationship="detailViewController" id="UGf-U4-BxB"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hu-GC-0xj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -48,7 +48,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="QFg-U2-Eu7" kind="showDetail" identifier="Show Gallery" id="HHe-oN-TjU"/>
+                                    <segue destination="zRh-L8-W2V" kind="showDetail" id="J6a-aI-gJM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -143,11 +143,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXT-U4-mrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="-88"/>
+            <point key="canvasLocation" x="74" y="299"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kii-Wa-cc7">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dji-Wz-iOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HPV-ft-np3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HsX-Z8-VgC">
@@ -155,34 +156,18 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qwQ-WX-wK5">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Y8e-h9-8SA" kind="relationship" relationship="rootViewController" id="mAA-q2-Hpu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dji-Wz-iOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-129" y="-821"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4Ea-I8-DmA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QFg-U2-Eu7" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zzi-JX-oj9">
-                        <rect key="frame" x="0.0" y="20" width="703.5" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="zRh-L8-W2V" kind="relationship" relationship="rootViewController" id="rSU-pO-Ono"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iro-js-f28" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-129" y="63"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HHe-oN-TjU"/>
+        <segue reference="UGf-U4-BxB"/>
     </inferredMetricsTieBreakers>
 </document>

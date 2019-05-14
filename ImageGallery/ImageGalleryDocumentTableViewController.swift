@@ -107,6 +107,9 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imageGallery = segue.destination as? ImageGalleryCollectionViewController {
+            imageGallery.title = (sender as? UITableViewCell)?.textLabel?.text
+        }
     }
 
 }
