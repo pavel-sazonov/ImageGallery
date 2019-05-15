@@ -12,7 +12,7 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     
     // MARK: - Model
     
-    var galleries = [[ImageGallery](), [ImageGallery]()]
+    var galleries = [[ImageGallery(name: "Gallery one")], [ImageGallery]()]
     
     // MARK: - Table view data source
 
@@ -20,14 +20,8 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
         return galleries.count
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 1 else { return nil }
-        
-        let label = UILabel()
-        label.text = "Recently Deleted"
-        label.backgroundColor = UIColor.lightGray
-        return label
-        
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 1 ? "Recently Deleted" : nil
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
