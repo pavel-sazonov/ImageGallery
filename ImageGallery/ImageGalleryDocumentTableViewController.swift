@@ -10,6 +10,13 @@ import UIKit
 
 class ImageGalleryDocumentTableViewController: UITableViewController {
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if splitViewController?.preferredDisplayMode != .primaryOverlay {
+            splitViewController?.preferredDisplayMode = .primaryOverlay
+        }
+    }
+    
     // MARK: - Model
     
     var galleries = [[ImageGallery(name: "Gallery one")], [ImageGallery]()]
