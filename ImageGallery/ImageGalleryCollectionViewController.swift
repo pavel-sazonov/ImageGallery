@@ -28,6 +28,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         collectionView.dragDelegate = self
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImages))
         collectionView.addGestureRecognizer(pinch)
+        
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
     }
     
     //MARK: - Model

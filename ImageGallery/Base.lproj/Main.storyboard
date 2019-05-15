@@ -15,7 +15,7 @@
                 <splitViewController id="Mak-Jq-khV" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HPV-ft-np3" kind="relationship" relationship="masterViewController" id="2iM-lf-9kP"/>
-                        <segue destination="zRh-L8-W2V" kind="relationship" relationship="detailViewController" id="UGf-U4-BxB"/>
+                        <segue destination="oSz-FY-ju1" kind="relationship" relationship="detailViewController" id="UGf-U4-BxB"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hu-GC-0xj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -48,7 +48,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zRh-L8-W2V" kind="showDetail" id="J6a-aI-gJM"/>
+                                    <segue destination="oSz-FY-ju1" kind="showDetail" id="J6a-aI-gJM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -111,6 +111,7 @@
                                     <constraint firstItem="IAe-gn-IX8" firstAttribute="centerX" secondItem="r9p-2b-wR9" secondAttribute="centerX" id="SIq-LM-mtt"/>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="centerY" secondItem="r9p-2b-wR9" secondAttribute="centerY" id="XQR-fe-PXE"/>
                                 </constraints>
+                                <size key="customSize" width="250" height="250"/>
                                 <connections>
                                     <outlet property="cellImageView" destination="Tdw-Gt-vkE" id="yUV-Vy-idl"/>
                                     <outlet property="spinner" destination="IAe-gn-IX8" id="f17-UU-Gdy"/>
@@ -132,6 +133,7 @@
                                     <constraint firstItem="Tfc-FV-dwG" firstAttribute="centerY" secondItem="tlj-7n-2bQ" secondAttribute="centerY" id="5nk-p9-muk"/>
                                     <constraint firstItem="Tfc-FV-dwG" firstAttribute="centerX" secondItem="tlj-7n-2bQ" secondAttribute="centerX" id="lVJ-OP-pMb"/>
                                 </constraints>
+                                <size key="customSize" width="250" height="250"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -143,12 +145,11 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXT-U4-mrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="299"/>
+            <point key="canvasLocation" x="798.046875" y="298.4375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kii-Wa-cc7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dji-Wz-iOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HPV-ft-np3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HsX-Z8-VgC">
@@ -163,11 +164,30 @@
                         <segue destination="Y8e-h9-8SA" kind="relationship" relationship="rootViewController" id="mAA-q2-Hpu"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dji-Wz-iOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-129" y="-821"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iht-kf-OmQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oSz-FY-ju1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lV6-WO-Emh">
+                        <rect key="frame" x="0.0" y="20" width="703.5" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zRh-L8-W2V" kind="relationship" relationship="rootViewController" id="yu1-ro-Tgp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rGo-jm-61S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="73.828125" y="298.4375"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UGf-U4-BxB"/>
+        <segue reference="J6a-aI-gJM"/>
     </inferredMetricsTieBreakers>
 </document>
