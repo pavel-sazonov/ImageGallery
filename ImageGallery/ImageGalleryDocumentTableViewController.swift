@@ -72,13 +72,12 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
         guard indexPath.section == 1 else { return nil }
         
         let restoreAction = UIContextualAction(style: .normal, title: "Restore") { (action, view, handler) in
-            let deletedGAllery = self.galleries[1].remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            // insert deleted row in section 0
-            let insertIndexPath = IndexPath(row: self.galleries[0].endIndex, section: 0)
-            self.galleries[0].insert(deletedGAllery, at: self.galleries[0].endIndex)
-            tableView.insertRows(at: [insertIndexPath], with: .fade)
+            // move row to section 0
+            tableView.performBatchUpdates({
+                let deletedGallery = self.galleries[1].remove(at: indexPath.row)
+                self.galleries[0].append(deletedGallery)
+                tableView.moveRow(at: indexPath, to: IndexPath(row: self.galleries[0].count-1, section: 0))
+            })
             handler(true)
         }
         
