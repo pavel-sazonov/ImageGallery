@@ -9,10 +9,14 @@
 import Foundation
 import UIKit
 
-struct ImageGallery {
-    var name: String
+struct ImageAttributes {
     var urls = [URL]()
     var aspectRatios = [CGFloat]()
+}
+
+struct ImageGallery {
+    var name: String
+    var images = [ImageAttributes]()
     
     static func uniqNewGalleryName(for galleries: [[ImageGallery]]) -> String {
         let galleryNames = galleries.joined().map { $0.name }

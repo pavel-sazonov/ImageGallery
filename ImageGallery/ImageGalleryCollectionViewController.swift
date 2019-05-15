@@ -32,7 +32,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
     //MARK: - Model
     
-    var imageGallery = ImageGallery(name: "")
+    var imageAttributes = ImageAttributes()
     
     /*
     // MARK: - Navigation
@@ -48,7 +48,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
 
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return imageGallery.urls.count
+        return imageAttributes.urls.count
     }
 
     override func collectionView(_ collectionView: UICollectionView,
@@ -58,7 +58,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         if let imageCell = cell as? ImageCollectionViewCell {
             imageCell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
-                let urlContent = try? Data(contentsOf: self.imageGallery.urls[indexPath.item])
+                let urlContent = try? Data(contentsOf: self.imageAttributes.urls[indexPath.item])
                 DispatchQueue.main.async {
                     if let imageData = urlContent {
                         imageCell.cellImageView.image = UIImage(data: imageData)
@@ -116,10 +116,10 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
             // local drag and drop
             if let sourceIndexPath = item.sourceIndexPath {
                 collectionView.performBatchUpdates({
-                    let url = imageGallery.urls.remove(at: sourceIndexPath.item)
-                    imageGallery.urls.insert(url, at: destinationIndexPath.item)
-                    let aspectRatio = imageGallery.aspectRatios.remove(at: sourceIndexPath.item)
-                    imageGallery.aspectRatios.insert(aspectRatio, at: destinationIndexPath.item)
+                    let url = imageAttributes.urls.remove(at: sourceIndexPath.item)
+                    imageAttributes.urls.insert(url, at: destinationIndexPath.item)
+                    let aspectRatio = imageAttributes.aspectRatios.remove(at: sourceIndexPath.item)
+                    imageAttributes.aspectRatios.insert(aspectRatio, at: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
@@ -129,7 +129,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                 item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) { (provider, error) in
                     if let url = (provider as? NSURL) as URL? {
                         let imageUrl = url.imageUrl
-                        self.imageGallery.urls.insert(imageUrl, at: destinationIndexPath.item)
+                        self.imageAttributes.urls.insert(imageUrl, at: destinationIndexPath.item)
                     }
                 }
                 
@@ -144,7 +144,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                         if let image = provider as? UIImage {
                             let aspectRatio = image.size.height / image.size.width
                             placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                                self.imageGallery.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
+                                self.imageAttributes.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
                             })
                         } else {
                             placeholderContext.deletePlaceholder()
@@ -160,7 +160,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellWidth, height: cellWidth * imageGallery.aspectRatios[indexPath.item])
+        return CGSize(width: cellWidth, height: cellWidth * imageAttributes.aspectRatios[indexPath.item])
     }
     
     // MARK: Gestures
