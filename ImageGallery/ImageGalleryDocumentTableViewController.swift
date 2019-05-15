@@ -109,9 +109,30 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let imageGallery = segue.destination as? ImageGalleryCollectionViewController {
-            imageGallery.title = (sender as? UITableViewCell)?.textLabel?.text
+            if let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
+                if let imageGallery = segue.destination.contents as? ImageGalleryCollectionViewController {
+                    imageGallery.imageAttributes = galleries[indexPath.section][indexPath.row].imageAttributes
+                    imageGallery.title = galleries[indexPath.section][indexPath.row].name
+            }
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell),
+            indexPath.section == 1 { return false }
+        return true
+    }
 
+}
+
+extension UIViewController {
+    var contents: UIViewController {
+        if let navcon = self as? UINavigationController {
+            return navcon.visibleViewController ?? self
+        } else {
+            return self
+        }
+    }
 }

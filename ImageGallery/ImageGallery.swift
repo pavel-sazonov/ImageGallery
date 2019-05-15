@@ -6,17 +6,16 @@
 //  Copyright © 2019 Pavel Sazonov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-struct ImageAttributes {
+class ImageAttributes {
     var urls = [URL]()
     var aspectRatios = [CGFloat]()
 }
 
 struct ImageGallery {
     var name: String
-    var images = [ImageAttributes]()
+    var imageAttributes = ImageAttributes()
     
     static func uniqNewGalleryName(for galleries: [[ImageGallery]]) -> String {
         let galleryNames = galleries.joined().map { $0.name }
