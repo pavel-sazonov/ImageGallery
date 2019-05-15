@@ -42,16 +42,18 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if indexPath.section == 0 {
-                let deletedGallery = galleries[0].remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                // move row to 'recently deleted' section
+                tableView.performBatchUpdates({
+                    let deletedGallery = galleries[0].remove(at: indexPath.row)
+                    galleries[1].append(deletedGallery)
+                    tableView.moveRow(at: indexPath, to: IndexPath(row: galleries[1].count-1, section: 1))
+                })
                 
-                // insert deleted row in 'recently deleted' section
-                galleries[1].append(deletedGallery)
-                tableView.insertRows(at: [IndexPath(row: galleries[1].count - 1, section: 1)],
-                                     with: .fade)
             } else if indexPath.section == 1 {
-                galleries[1].remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.performBatchUpdates({
+                    galleries[1].remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                })
             }
         }
     }
