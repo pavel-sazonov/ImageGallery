@@ -39,8 +39,18 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
         let galleryName = galleries[indexPath.section][indexPath.row].name
-
-        cell.textLabel?.text = galleryName
+        
+        if let inputCell = cell as? TextFieldTableViewCell {
+            inputCell.textField.text = galleryName
+            inputCell.resignationHandler = { [weak self, unowned inputCell] in
+                if let text = inputCell.textField.text {
+                    self?.galleries[indexPath.section][indexPath.row].name = text
+                }
+                
+                inputCell.textField.text = nil
+                tableView.reloadData()
+            }
+        }
 
         return cell
     }
