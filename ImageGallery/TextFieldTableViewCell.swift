@@ -13,10 +13,19 @@ class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField! {
         didSet {
             textField.delegate = self
+            let tap = UITapGestureRecognizer(target: self, action: #selector(editName))
+            tap.numberOfTapsRequired = 2
+            addGestureRecognizer(tap)
         }
     }
     
+    @objc func editName() {
+        textField.isEnabled = true
+        textField.becomeFirstResponder()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.isEnabled = false
         textField.resignFirstResponder()
         return true
     }

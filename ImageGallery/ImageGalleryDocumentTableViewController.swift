@@ -9,6 +9,10 @@
 import UIKit
 
 class ImageGalleryDocumentTableViewController: UITableViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
      override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // show master on start in all multitasking modes
@@ -47,11 +51,11 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
                     self?.galleries[indexPath.section][indexPath.row].name = text
                 }
                 
-                inputCell.textField.text = nil
-                tableView.reloadData()
+                tableView.reloadRows(at: [indexPath], with: .fade)
+                self?.selectRowAndSegue(at: indexPath)
             }
         }
-
+        
         return cell
     }
     
@@ -75,7 +79,9 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
     
     // MARK: - Delete row.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if indexPath.section == 0 {
                 // move row to 'recently deleted' section
@@ -83,7 +89,9 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
                     let deletedGallery = galleries[0].remove(at: indexPath.row)
                     galleries[1].append(deletedGallery)
                     tableView.moveRow(at: indexPath, to: IndexPath(row: galleries[1].count-1, section: 1))
-                }, completion: { finished in
+                }, completion: { [unowned self] finished in
+                    tableView.reloadRows(at: [IndexPath(row: self.galleries[1].count-1, section: 1)], with: .fade)
+                    
                     Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false) { timer in
                         tableView.selectRow(at: IndexPath(row: self.galleries[1].count-1, section: 1), animated: false, scrollPosition: .none)
                     }
@@ -118,7 +126,9 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
                 let deletedGallery = self.galleries[1].remove(at: indexPath.row)
                 self.galleries[0].append(deletedGallery)
                 tableView.moveRow(at: indexPath, to: IndexPath(row: self.galleries[0].count-1, section: 0))
-            }, completion: { finished in
+            }, completion: { [unowned self] finished in
+                tableView.reloadRows(at: [IndexPath(row: self.galleries[0].count-1, section: 0)], with: .fade)
+                
                 Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { timer in
                     self.selectRowAndSegue(at: IndexPath(row: self.galleries[0].count-1, section: 0))
                 }
