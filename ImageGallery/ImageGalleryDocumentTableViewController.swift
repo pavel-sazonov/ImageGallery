@@ -28,7 +28,10 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 1 ? "Recently Deleted" : nil
+//        return section == 1 ? "Recently Deleted" : nil
+        guard section == 1 else { return nil }
+        
+        return galleries[section].isEmpty ? nil : "Recently Deleted"
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
