@@ -9,10 +9,6 @@
 import UIKit
 
 class ImageGalleryDocumentTableViewController: UITableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
      override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // show master on start in all multitasking modes
@@ -108,11 +104,13 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     // MARK: - Add row
     
     @IBAction func newImageGallery(_ sender: UIBarButtonItem) {
-        let newGallery = ImageGallery(name: ImageGallery.uniqNewGalleryName(for: galleries))
-        galleries[0].append(newGallery)
-        tableView.reloadData()
-        
-        selectRowAndSegue(at: IndexPath(row: galleries[0].count - 1, section: 0))
+        tableView.performBatchUpdates({
+            let newGallery = ImageGallery(name: ImageGallery.uniqNewGalleryName(for: galleries))
+            galleries[0].append(newGallery)
+            tableView.insertRows(at: [IndexPath(row: galleries[0].count - 1, section: 0)], with: .fade)
+        }) { [unowned self] finished in
+            self.selectRowAndSegue(at: IndexPath(row: self.galleries[0].count - 1, section: 0))
+        }
     }
     
     // MARK: - Leading swipe for restore row from recently deleted section
