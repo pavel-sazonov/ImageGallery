@@ -28,7 +28,6 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return section == 1 ? "Recently Deleted" : nil
         guard section == 1 else { return nil }
         
         return galleries[section].isEmpty ? nil : "Recently Deleted"
@@ -39,20 +38,19 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "DocumentCell",
+            for: indexPath) as! TextFieldTableViewCell
         
-        let galleryName = galleries[indexPath.section][indexPath.row].name
+        cell.imageGallery = galleries[indexPath.section][indexPath.row]
         
-        if let inputCell = cell as? TextFieldTableViewCell {
-            inputCell.textField.text = galleryName
-            inputCell.resignationHandler = { [weak self, unowned inputCell] in
-                if let text = inputCell.textField.text {
-                    self?.galleries[indexPath.section][indexPath.row].name = text
-                }
-                
-                tableView.reloadRows(at: [indexPath], with: .fade)
-                self?.selectRowAndSegue(at: indexPath)
+        cell.resignationHandler = { [weak self, unowned cell] in
+            if let text = cell.textField.text {
+                self?.galleries[indexPath.section][indexPath.row].name = text
             }
+            
+            tableView.reloadRows(at: [indexPath], with: .fade)
+            self?.selectRowAndSegue(at: indexPath)
         }
         
         return cell

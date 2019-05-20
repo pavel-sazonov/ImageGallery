@@ -35,5 +35,11 @@ class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         resignationHandler?()
     }
+    
+    var imageGallery: ImageGallery! {
+        didSet {
+            textField.text = imageGallery.name
+        }
+    }
 
 }
