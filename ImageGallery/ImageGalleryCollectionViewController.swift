@@ -123,8 +123,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                     imageAttributes.urls.insert(url, at: destinationIndexPath.item)
                     let aspectRatio = imageAttributes.aspectRatios.remove(at: sourceIndexPath.item)
                     imageAttributes.aspectRatios.insert(aspectRatio, at: destinationIndexPath.item)
-                    collectionView.deleteItems(at: [sourceIndexPath])
-                    collectionView.insertItems(at: [destinationIndexPath])
+                    collectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
                 })
                 coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
             // drag and drop from other app
