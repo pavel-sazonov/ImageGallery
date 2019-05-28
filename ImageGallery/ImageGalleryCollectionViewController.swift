@@ -113,7 +113,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
-        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: imageAttributes.urls.endIndex, section: 0)
         
         for item in coordinator.items {
             // local drag and drop
