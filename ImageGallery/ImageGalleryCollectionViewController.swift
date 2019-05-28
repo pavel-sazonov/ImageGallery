@@ -56,20 +56,25 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
-    
-        if let imageCell = cell as? ImageCollectionViewCell {
-            imageCell.spinner.startAnimating()
-            let url = imageAttributes.urls[indexPath.item]
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let urlContent = try? Data(contentsOf: url)
-                DispatchQueue.main.async {
-                    if let imageData = urlContent, url == self?.imageAttributes.urls[indexPath.item] {
-                        imageCell.cellImageView.image = UIImage(data: imageData)
-                        imageCell.spinner.stopAnimating()
-                    }
+        
+        guard let imageCell = cell as? ImageCollectionViewCell else { return cell }
+        
+        imageCell.cellImageView.image = nil
+        
+        let url = imageAttributes.urls[indexPath.item]
+        
+        imageCell.spinner.startAnimating()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let urlContent = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                if let imageData = urlContent, url == self?.imageAttributes.urls[indexPath.item] {
+                    imageCell.cellImageView.image = UIImage(data: imageData)
+                    imageCell.spinner.stopAnimating()
                 }
             }
         }
+        
         return cell
     }
     
@@ -82,7 +87,9 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         return dragItems(at: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+    func collectionView(_ collectionView: UICollectionView,
+                        itemsForAddingTo session: UIDragSession,
+                        at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
         return dragItems(at: indexPath)
     }
     
@@ -113,7 +120,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
-        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: imageAttributes.urls.endIndex, section: 0)
+        let destinationIndexPath = coordinator.destinationIndexPath ??
+            IndexPath(item: imageAttributes.urls.endIndex, section: 0)
         
         for item in coordinator.items {
             // local drag and drop
