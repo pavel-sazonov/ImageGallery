@@ -59,10 +59,11 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     
         if let imageCell = cell as? ImageCollectionViewCell {
             imageCell.spinner.startAnimating()
-            DispatchQueue.global(qos: .userInitiated).async {
-                let urlContent = try? Data(contentsOf: self.imageAttributes.urls[indexPath.item])
+            let url = imageAttributes.urls[indexPath.item]
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let urlContent = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
-                    if let imageData = urlContent {
+                    if let imageData = urlContent, url == self?.imageAttributes.urls[indexPath.item] {
                         imageCell.cellImageView.image = UIImage(data: imageData)
                         imageCell.spinner.stopAnimating()
                     }
