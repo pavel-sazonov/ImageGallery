@@ -17,6 +17,41 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+            // test images
+            galleries[0][0].imageAttributes.urls = [
+                URL(string: "http://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg")!,
+                URL(string: "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/rf/image_960w/2010-2019/WashingtonPost/2016/05/05/Interactivity/Images/iStock_000001440835_Large1462483441.jpg&w=1484")!,
+                URL(string: "http://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg")!,
+                URL(string: "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/rf/image_960w/2010-2019/WashingtonPost/2016/05/05/Interactivity/Images/iStock_000001440835_Large1462483441.jpg&w=1484")!,
+                URL(string: "http://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg")!,
+                URL(string: "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/rf/image_960w/2010-2019/WashingtonPost/2016/05/05/Interactivity/Images/iStock_000001440835_Large1462483441.jpg&w=1484")!,
+                URL(string: "http://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg")!,
+                URL(string: "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/rf/image_960w/2010-2019/WashingtonPost/2016/05/05/Interactivity/Images/iStock_000001440835_Large1462483441.jpg&w=1484")!,
+                URL(string: "https://www.nydailynews.com/resizer/x8DqQ_WT3uE0QyS0fe2C527xIZI=/1200x0/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/AU6GU3ZVA5G2NBT2CUTD2K53C4.jpg")!,
+                URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6IT5rN3bmo6lhbrZDh5Pdu19OoM8uFtRvk6LzrTZP22uLf2kc")!,
+                URL(string: "https://dcist.com/wp-content/uploads/sites/3/2019/04/Gem2-1500x1346.jpg")!,
+                URL(string: "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/rf/image_960w/2010-2019/WashingtonPost/2016/05/05/Interactivity/Images/iStock_000001440835_Large1462483441.jpg&w=1484")!,
+        ]
+        
+        galleries[0][0].imageAttributes.aspectRatios = [
+            1.2763819095477387,
+            0.6690909090909091,
+            1.2763819095477387,
+            0.6690909090909091,
+            1.2763819095477387,
+            0.6690909090909091,
+            1.2763819095477387,
+            0.6690909090909091,
+            1.0,
+            0.9955555555555555,
+            0.8987341772151899,
+            0.6690909090909091,
+        ]
+    }
+    
     // MARK: - Model
     
     var galleries = [[ImageGallery(name: "Gallery one")], [ImageGallery]()]
