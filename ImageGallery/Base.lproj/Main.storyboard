@@ -124,7 +124,7 @@
                                     <outlet property="spinner" destination="IAe-gn-IX8" id="f17-UU-Gdy"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DropPlaceholderCell" id="tlj-7n-2bQ">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DropPlaceholderCell" id="tlj-7n-2bQ">
                                 <rect key="frame" x="433.5" y="20" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -132,7 +132,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Tfc-FV-dwG">
-                                            <rect key="frame" x="-18.5" y="106.5" width="37" height="37"/>
+                                            <rect key="frame" x="106.5" y="106.5" width="37" height="37"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>

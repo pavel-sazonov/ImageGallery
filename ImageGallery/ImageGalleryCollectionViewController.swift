@@ -54,22 +54,22 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
 
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
-        
-        guard let imageCell = cell as? ImageCollectionViewCell else { return cell }
-        
-        imageCell.cellImageView.image = nil
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell",
+                                                      for: indexPath) as! ImageCollectionViewCell
+                
+        // when reuse cell will not use old image while data is loading
+        cell.cellImageView.image = nil
         
         let url = imageAttributes.urls[indexPath.item]
         
-        imageCell.spinner.startAnimating()
+        cell.spinner.startAnimating()
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let urlContent = try? Data(contentsOf: url)
             DispatchQueue.main.async {
                 if let imageData = urlContent, url == self?.imageAttributes.urls[indexPath.item] {
-                    imageCell.cellImageView.image = UIImage(data: imageData)
-                    imageCell.spinner.stopAnimating()
+                    cell.cellImageView.image = UIImage(data: imageData)
+                    cell.spinner.stopAnimating()
                 }
             }
         }

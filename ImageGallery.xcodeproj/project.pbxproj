@@ -26,10 +26,10 @@
 		18185BBA2277744700A52B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18185BBC2277744700A52B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionViewController.swift; sourceTree = "<group>"; };
-		18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = ../ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		1891163A228863EA00AB81D4 /* ImageGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
 		18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDocumentTableViewController.swift; sourceTree = "<group>"; };
-		18DB0A662290A5F6007929E1 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		18DB0A662290A5F6007929E1 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldTableViewCell.swift; path = ../TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +64,9 @@
 			children = (
 				18185BB42277744500A52B39 /* Main.storyboard */,
 				18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */,
+				1821679E22A033F6003723F5 /* View */,
 				18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */,
-				18DB0A662290A5F6007929E1 /* TextFieldTableViewCell.swift */,
 				1891163A228863EA00AB81D4 /* ImageGallery.swift */,
-				18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */,
 				18185BBC2277744700A52B39 /* Info.plist */,
 				18185BC22277746300A52B39 /* Supporting Files */,
 			);
@@ -82,6 +81,15 @@
 				18185BB92277744700A52B39 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1821679E22A033F6003723F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */,
+				18DB0A662290A5F6007929E1 /* TextFieldTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
