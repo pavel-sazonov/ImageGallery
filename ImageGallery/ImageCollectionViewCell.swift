@@ -10,7 +10,24 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    func setup(with url: URL) {
+        // when reuse cell will not use old image while data is loading
+        imageView.image = nil
+        
+        spinner.startAnimating()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let urlContent = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                if let imageData = urlContent {
+                    self.imageView.image = UIImage(data: imageData)
+                    self.spinner.stopAnimating()
+                }
+            }
+        }
+    }
 }

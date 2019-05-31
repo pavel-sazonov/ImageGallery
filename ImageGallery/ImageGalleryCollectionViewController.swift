@@ -56,23 +56,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell",
                                                       for: indexPath) as! ImageCollectionViewCell
-                
-        // when reuse cell will not use old image while data is loading
-        cell.cellImageView.image = nil
-        
-        let url = imageAttributes.urls[indexPath.item]
-        
-        cell.spinner.startAnimating()
-        
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let urlContent = try? Data(contentsOf: url)
-            DispatchQueue.main.async {
-                if let imageData = urlContent, url == self?.imageAttributes.urls[indexPath.item] {
-                    cell.cellImageView.image = UIImage(data: imageData)
-                    cell.spinner.stopAnimating()
-                }
-            }
-        }
+                        
+        cell.setup(with: imageAttributes.urls[indexPath.item])
         
         return cell
     }
@@ -93,7 +78,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     }
     
     private func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
-        if let image = (collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell)?.cellImageView.image {
+        if let image = (collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell)?.imageView.image {
             let dragItem = UIDragItem(itemProvider: NSItemProvider(object: image))
             return [dragItem]
         } else {
