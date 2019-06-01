@@ -16,7 +16,10 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         return collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
     }
     
-    var cellWidth: CGFloat = 250 {
+    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 25.0, bottom: 50.0, right: 25.0)
+    private var itemsPerRow: CGFloat = 3
+
+    private var scaleFactor: CGFloat = 1.0 {
         didSet {
             flowLayout?.invalidateLayout()
         }
@@ -29,6 +32,12 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImages))
         collectionView.addGestureRecognizer(pinch)
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+    }
+    
+    // recalculate cell width after rotate
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        flowLayout?.invalidateLayout()
     }
     
     //MARK: - Model
@@ -154,7 +163,17 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let cellWidth = (availableWidth / itemsPerRow) * scaleFactor
+        
         return CGSize(width: cellWidth, height: cellWidth * imageAttributes.aspectRatios[indexPath.item])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
     }
     
     // MARK: Gestures
@@ -162,8 +181,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
     @objc func zoomImages(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
         case .changed, .ended:
-            cellWidth *= sender.scale
-            sender.scale = 1.0
+            scaleFactor = sender.scale
         default: break
         }
     }
