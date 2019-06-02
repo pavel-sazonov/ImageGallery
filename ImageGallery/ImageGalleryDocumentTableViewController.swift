@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageGalleryDocumentTableViewController: UITableViewController {
-     override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // show master on start in all multitasking modes
         if splitViewController?.preferredDisplayMode != .primaryOverlay {
@@ -19,7 +19,6 @@ class ImageGalleryDocumentTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // test images
         galleries[0][0].imageAttributes.urls = [
             URL(string: "http://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg")!,

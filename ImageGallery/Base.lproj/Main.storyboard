@@ -120,13 +120,12 @@
                                     <constraint firstItem="IAe-gn-IX8" firstAttribute="centerX" secondItem="r9p-2b-wR9" secondAttribute="centerX" id="SIq-LM-mtt"/>
                                     <constraint firstItem="Tdw-Gt-vkE" firstAttribute="centerY" secondItem="r9p-2b-wR9" secondAttribute="centerY" id="XQR-fe-PXE"/>
                                 </constraints>
-                                <size key="customSize" width="200" height="200"/>
                                 <connections>
                                     <outlet property="imageView" destination="Tdw-Gt-vkE" id="yUV-Vy-idl"/>
                                     <outlet property="spinner" destination="IAe-gn-IX8" id="f17-UU-Gdy"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DropPlaceholderCell" id="tlj-7n-2bQ">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DropPlaceholderCell" id="tlj-7n-2bQ">
                                 <rect key="frame" x="252" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -134,7 +133,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Tfc-FV-dwG">
-                                            <rect key="frame" x="-18.5" y="81.5" width="37" height="37"/>
+                                            <rect key="frame" x="81.5" y="81.5" width="37" height="37"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>
@@ -142,7 +141,6 @@
                                     <constraint firstItem="Tfc-FV-dwG" firstAttribute="centerY" secondItem="tlj-7n-2bQ" secondAttribute="centerY" id="5nk-p9-muk"/>
                                     <constraint firstItem="Tfc-FV-dwG" firstAttribute="centerX" secondItem="tlj-7n-2bQ" secondAttribute="centerX" id="lVJ-OP-pMb"/>
                                 </constraints>
-                                <size key="customSize" width="200" height="200"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
