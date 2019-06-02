@@ -9,26 +9,14 @@
 import UIKit
 
 class ImageViewController: UIViewController {
+    
+    var imageView = UIImageView()
 
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-            scrollView.addSubview(imageView)
-        }
-    }
-    
-    var imageView = UIImageView()
-    
-    var image: UIImage? {
-        get {
-            return imageView.image
-        }
-        
-        set {
-            imageView.image = newValue
             imageView.sizeToFit()
+            scrollView.addSubview(imageView)
             scrollView.contentSize = imageView.frame.size
         }
     }
-    
-
 }
