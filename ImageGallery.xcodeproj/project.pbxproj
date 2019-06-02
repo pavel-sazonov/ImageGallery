@@ -12,6 +12,8 @@
 		18185BB82277744700A52B39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18185BB72277744700A52B39 /* Assets.xcassets */; };
 		18185BBB2277744700A52B39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18185BB92277744700A52B39 /* LaunchScreen.storyboard */; };
 		18185BC82278892A00A52B39 /* ImageGalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */; };
+		18470DDA22A3E40A00E1ADEA /* ImageAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18470DD922A3E40A00E1ADEA /* ImageAttributes.swift */; };
+		18470DDC22A3E4AD00E1ADEA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18470DDB22A3E4AD00E1ADEA /* Utilities.swift */; };
 		18789DA72278E88A003A99C8 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */; };
 		1891163B228863EB00AB81D4 /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891163A228863EA00AB81D4 /* ImageGallery.swift */; };
 		18CBC83A2282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */; };
@@ -27,6 +29,8 @@
 		18185BBA2277744700A52B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18185BBC2277744700A52B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18185BC72278892A00A52B39 /* ImageGalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionViewController.swift; sourceTree = "<group>"; };
+		18470DD922A3E40A00E1ADEA /* ImageAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttributes.swift; sourceTree = "<group>"; };
+		18470DDB22A3E4AD00E1ADEA /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		18789DA62278E88A003A99C8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = ../ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		1891163A228863EA00AB81D4 /* ImageGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
 		18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDocumentTableViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +73,8 @@
 				18CD890C22A2FD6800A5A0CF /* ImageViewController.swift */,
 				18CBC8392282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift */,
 				1821679E22A033F6003723F5 /* View */,
-				1891163A228863EA00AB81D4 /* ImageGallery.swift */,
+				18470DDD22A3E59B00E1ADEA /* Model */,
+				18470DDB22A3E4AD00E1ADEA /* Utilities.swift */,
 				18185BBC2277744700A52B39 /* Info.plist */,
 				18185BC22277746300A52B39 /* Supporting Files */,
 			);
@@ -93,6 +98,15 @@
 				18DB0A662290A5F6007929E1 /* TextFieldTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18470DDD22A3E59B00E1ADEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1891163A228863EA00AB81D4 /* ImageGallery.swift */,
+				18470DD922A3E40A00E1ADEA /* ImageAttributes.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,9 +182,11 @@
 			files = (
 				18185BB12277744500A52B39 /* AppDelegate.swift in Sources */,
 				1891163B228863EB00AB81D4 /* ImageGallery.swift in Sources */,
+				18470DDA22A3E40A00E1ADEA /* ImageAttributes.swift in Sources */,
 				18CBC83A2282DB9100D95214 /* ImageGalleryDocumentTableViewController.swift in Sources */,
 				18CD890D22A2FD6800A5A0CF /* ImageViewController.swift in Sources */,
 				18DB0A672290A5F6007929E1 /* TextFieldTableViewCell.swift in Sources */,
+				18470DDC22A3E4AD00E1ADEA /* Utilities.swift in Sources */,
 				18185BC82278892A00A52B39 /* ImageGalleryCollectionViewController.swift in Sources */,
 				18789DA72278E88A003A99C8 /* ImageCollectionViewCell.swift in Sources */,
 			);
