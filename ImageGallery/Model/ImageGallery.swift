@@ -6,9 +6,9 @@
 //  Copyright © 2019 Pavel Sazonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class ImageAttributes {
     var urls = [URL]()
-    var aspectRatios = [CGFloat]()
+    var aspectRatios = [Double]()
 }

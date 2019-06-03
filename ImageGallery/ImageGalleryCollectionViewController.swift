@@ -135,7 +135,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
                 item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (provider, error) in
                     DispatchQueue.main.async {
                         if let image = provider as? UIImage {
-                            let aspectRatio = image.size.height / image.size.width
+                            let aspectRatio = Double(image.size.height / image.size.width)
                             placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
                                 self.imageAttributes.aspectRatios.insert(aspectRatio, at: insertionIndexPath.item)
                             })
@@ -157,7 +157,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         let availableWidth = view.frame.width - paddingSpace
         let cellWidth = (availableWidth / itemsPerRow) * scaleFactor
         
-        return CGSize(width: cellWidth, height: cellWidth * imageAttributes.aspectRatios[indexPath.item])
+        return CGSize(width: cellWidth, height: cellWidth * CGFloat(imageAttributes.aspectRatios[indexPath.item]))
     }
     
     func collectionView(_ collectionView: UICollectionView,
