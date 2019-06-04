@@ -14,19 +14,31 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    func setup(with url: URL) {
-        // when reuse cell will not use old image while data is loading
-        imageView.image = nil
+    func loadImage(with url: URL) {
+        let cache = URLCache.shared
+        let request = URLRequest(url: url)
         
-        spinner.startAnimating()
-        
+        self.spinner.startAnimating()
         DispatchQueue.global(qos: .userInitiated).async {
-            let urlContent = try? Data(contentsOf: url)
-            DispatchQueue.main.async {
-                if let imageData = urlContent {
-                    self.imageView.image = UIImage(data: imageData)
+            if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
                     self.spinner.stopAnimating()
                 }
+            } else {
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data,
+                        let response = response,
+                        ((response as? HTTPURLResponse)?.statusCode ?? 500) < 300,
+                        let image = UIImage(data: data) {
+                        let cachedData = CachedURLResponse(response: response, data: data)
+                        cache.storeCachedResponse(cachedData, for: request)
+                        DispatchQueue.main.async {
+                            self.imageView.image = image
+                            self.spinner.stopAnimating()
+                        }
+                    }
+                }.resume()
             }
         }
     }

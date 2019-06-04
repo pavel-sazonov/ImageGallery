@@ -56,7 +56,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell",
                                                       for: indexPath) as! ImageCollectionViewCell
                         
-        cell.setup(with: imageAttributes.urls[indexPath.item])
+        cell.loadImage(with: imageAttributes.urls[indexPath.item])
         
         return cell
     }
